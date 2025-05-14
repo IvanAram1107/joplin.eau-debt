@@ -1,0 +1,7 @@
+{
+  "extraScripts": [
+    "eau.ts",
+    "eau.types.ts",
+    "eau.templates.ts"
+  ]
+}

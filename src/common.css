@@ -1,0 +1,171 @@
+/* ----------------- */
+/* KIND OF CSS RESET */
+/* ----------------- */
+
+* {
+  background-color: var(--joplin-background-color);
+  color: var(--joplin-color);
+  font-size: var(--joplin-font-size);
+  line-height: var(--joplin-font-size);
+  outline: none;
+  transition: background-color 300ms, color 300ms;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* ----- */
+/* LISTS */
+/* ----- */
+
+.eau-list {
+  width: 100%;
+}
+
+.eau-list-item {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+  height: 38px;
+}
+
+.eau-list-item:not(:last-child) {
+  border-bottom: 1px solid var(--joplin-code-border-color); 
+}
+
+.eau-list-item-label {
+  flex: 1 auto;
+}
+
+.eau-list-item-checkbox {
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--joplin-code-border-color);
+  background-color: var(--joplin-code-border-color);
+  border-radius: 2px;
+  display: inline-grid;
+  place-content: center;
+  cursor: pointer;
+}
+
+.eau-list-item-checkbox::before {
+  content: "";
+  display: block;
+  width: 12px;
+  height: 12px;
+  transition: 70ms transform ease-in-out;
+  background-color: var(--joplin-highlighted-color);
+  transform: scale(0);
+}
+
+.eau-list-item-checkbox[data-checked="1"]::before {
+  transform: scale(1);
+}
+
+.eau-list-item:has(.eau-list-item-checkbox[data-checked="1"]) .eau-list-item-label {
+  text-decoration: line-through;
+  color: gray;
+}
+
+.eau-list-item-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background: transparent;
+  border-radius: 3px;
+  cursor: pointer;
+  border: 1px solid var(--joplin-code-border-color);
+}
+
+/* ------- */
+/* DIALOGS */
+/* ------- */
+
+#joplin-plugin-content:has(.eau-dialog) {
+  min-width: 400px;
+}
+
+.eau-dialog {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.eau-dialog-title {
+  font-size: 16px;
+  line-height: 16px;
+  font-weight: bold;
+}
+
+.eau-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.eau-form .eau-form-field {
+  position: relative;
+}
+
+.eau-form .eau-form-field:has(.eau-input) .eau-label {
+  position: absolute;
+  transition: all 300ms;
+  left: 9px;
+}
+
+.eau-form .eau-form-field:has(.eau-checkbox-input) {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 6px;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.eau-form .eau-form-field .eau-input {
+  width: 100%;
+  transition: padding 300ms;
+  min-width: 0;
+  background-color: transparent;
+  border: 1px solid var(--joplin-code-border-color);
+  border-radius: 4px 4px 0 0;
+  border-bottom: 2px solid var(--joplin-color-faded);
+  padding: 8px 8px 6px;
+  outline: none;
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+.eau-form .eau-form-field .eau-input:focus {
+  border-color: var(--joplin-color-faded);
+  border-bottom-color: var(--joplin-color);
+}
+
+/* input with focus*/
+.eau-form .eau-form-field .eau-input:focus,
+/* Not empty input*/
+.eau-form .eau-form-field .eau-input:not(:placeholder-shown) {
+  padding-top: 22px;
+}
+
+.eau-form .eau-form-field .eau-input::-webkit-outer-spin-button,
+.eau-form .eau-form-field .eau-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+/* Label for empty input*/
+.eau-form .eau-form-field:has(.eau-input:placeholder-shown) .eau-label {
+  top: 10px;
+  color: var(--joplin-color);
+}
+
+/* Label for input with focus */
+.eau-form .eau-form-field:has(.eau-input:focus) .eau-label,
+/* Label for not empty input */
+.eau-form .eau-form-field:has(.eau-input:not(:placeholder-shown)) .eau-label {
+  top: 6px;
+  color: var(--joplin-color-faded);
+  font-size: calc(var(--joplin-font-size) - 1px);
+}

@@ -1,0 +1,16 @@
+{
+	"manifest_version": 1,
+	"id": "eau.aram.debt-list",
+	"app_min_version": "3.2",
+	"version": "1.0.0",
+	"name": "Eau Debt",
+	"description": "Plugin to manage my debt",
+	"author": "Ivan Aram Gonazlez Su",
+	"homepage_url": "https://github.com/IvanAram1107/joplin.eau-debt",
+	"repository_url": "https://github.com/IvanAram1107/joplin.eau-debt",
+	"keywords": [],
+	"categories": [],
+	"screenshots": [],
+	"icons": {},
+	"promo_tile": {}
+}
