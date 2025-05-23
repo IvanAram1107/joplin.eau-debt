@@ -1,0 +1,51 @@
+.eau-debt-debtor,
+.eau-debt-creditor {
+  letter-spacing: 1px;
+}
+
+.eau-debt-debtor {
+  color: #8be78b;
+}
+
+.eau-debt-creditor {
+  color: #ff5252;
+}
+
+.debt-container {
+  margin: 12px;
+  border: 2px solid var(--joplin-code-border-color);
+  border-radius: 8px;
+}
+
+.debt-container .debt-title-container {
+  display: flex;
+  gap: 8px;
+  justify-content: space-between;
+  align-items: center;
+  flex-flow: row nowrap;
+  padding: 6px 8px;
+  border-bottom: 2px solid var(--joplin-code-border-color);
+  background: transparent;
+}
+
+.debt-container .debt-title-container .debt-button {
+  background: transparent;
+  color: var(--joplin-color);
+  border: 1px solid var(--joplin-code-border-color);
+  border-radius: 4px;
+  padding: 4px 5px;
+  cursor: pointer;
+}
+
+.debt-container .debt-list-container {
+  background-color: transparent;
+}
+
+.debt-container .debt-list-container .eau-list {
+  background-color: transparent;
+  padding: 0 8px;
+}
+
+.eau-dropdown {
+  flex: 1 auto;
+}

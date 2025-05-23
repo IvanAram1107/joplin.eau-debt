@@ -1,9 +1,11 @@
+/* DO NOT MODIFY THIS FILE, IT WILL BE REPLACED */
+
 /* ----------------- */
 /* KIND OF CSS RESET */
 /* ----------------- */
 
 * {
-  background-color: var(--joplin-background-color);
+  /* background-color: var(--joplin-background-color); */
   color: var(--joplin-color);
   font-size: var(--joplin-font-size);
   line-height: var(--joplin-font-size);
@@ -13,12 +15,45 @@
   box-sizing: border-box;
 }
 
+/* --------- */
+/* SCROLLBAR */
+/* --------- */
+
+.eau-scrollbar {
+  overflow: auto;
+}
+
+/* width */
+.eau-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Track */
+.eau-scrollbar::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey; 
+  border-radius: 16px;
+}
+ 
+/* Handle */
+.eau-scrollbar::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 16px;
+}
+
+/* Handle on hover */
+.eau-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
 /* ----- */
 /* LISTS */
 /* ----- */
 
 .eau-list {
   width: 100%;
+  padding: 0 8px;
+  background-color: transparent;
+  max-height: 285px;
 }
 
 .eau-list-item {
@@ -37,6 +72,8 @@
 
 .eau-list-item-label {
   flex: 1 auto;
+  display: flex;
+  justify-content: space-between;
 }
 
 .eau-list-item-checkbox {
@@ -76,9 +113,8 @@
   width: 20px;
   height: 20px;
   background: transparent;
-  border-radius: 3px;
   cursor: pointer;
-  border: 1px solid var(--joplin-code-border-color);
+  border: 0
 }
 
 /* ------- */
@@ -104,6 +140,7 @@
 .eau-form {
   display: flex;
   flex-direction: column;
+  gap: 12px;
 }
 
 .eau-form .eau-form-field {
@@ -168,4 +205,46 @@
   top: 6px;
   color: var(--joplin-color-faded);
   font-size: calc(var(--joplin-font-size) - 1px);
+}
+
+/* -------- */
+/* DROPDOWN */
+/* -------- */
+
+.eau-dropdown {
+  position: relative;
+  /* display: inline-block; */
+  /* width: 100%; */
+}
+
+.eau-dropdown-content {
+  display: none;
+  border: 1px solid var(--joplin-code-border-color);
+  border-radius: 2px;
+  position: absolute;
+  background-color: #f9f9f9;
+  width: 100%;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.eau-dropdown .eau-dropdown-label {
+  display: block;
+}
+
+.eau-dropdown.open .eau-dropdown-content {
+  display: block;
+  background-color: var(--joplin-background-color);
+}
+
+.eau-dropdown .eau-dropdown-content .eau-dropdown-item {
+  padding: 6px 8px;
+}
+
+.eau-dropdown .eau-dropdown-content .eau-dropdown-item:not(:last-child) {
+  border-bottom: 1px solid var(--joplin-code-border-color);
+}
+
+.eau-dropdown .eau-dropdown-content .eau-dropdown-item:hover {
+  background-color: var(--joplin-highlighted-color);
 }

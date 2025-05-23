@@ -1,3 +1,5 @@
+/* DO NOT MODIFY THIS FILE, IT WILL BE REPLACED */
+
 export type EauTask = {
   id: string;
 	description: string;
@@ -6,14 +8,23 @@ export type EauTask = {
 }
 
 export type EauDebtEntity = {
+  id: string;
   name: string;
-  total: number;
+  amount: number;
+  isDebtor: boolean;
+}
+
+export type EauShoppingItem = {
+  id: string;
+  name: string;
+  price?: number;
 }
 
 export type EauConfig = {
   noteId: string;
   tasks: EauTask[];
   debt: EauDebtEntity[];
+  shopping: EauShoppingItem[];
 }
 
 export type EauCommand = {
@@ -67,11 +78,23 @@ export type EauDialogInput = {
   type: "number" | "text" | "checkbox";
 }
 
-export type EauListItem = {
+type EauListItemBase = {
   checkbox?: EauCheckbox | EauCheckbox[];
-  label: string;
+  classes?: string[];
   button?: EauButton | EauButton[];
 }
+
+type EauListItemWithLabel = EauListItemBase & {
+  label: string;
+  content?: never;
+}
+
+type EauListItemWithContent = EauListItemBase & {
+  label?: never;
+  content: string;
+}
+
+export type EauListItem = EauListItemWithLabel | EauListItemWithContent;
 
 /**
  * This is used to set the placement of the element inside a list item (except the label).
@@ -96,4 +119,10 @@ export type EauButton = {
   content: string;
   onclick: string;
   placement?: EauPlacement;
+}
+
+export type EauDropdown = {
+  id: string;
+  label: string;
+  items: string[];
 }
