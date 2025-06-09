@@ -4,7 +4,6 @@ export type EauTask = {
   id: string;
 	description: string;
 	dueToday: boolean;
-	completed: boolean;
 }
 
 export type EauDebtEntity = {

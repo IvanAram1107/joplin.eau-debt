@@ -2,6 +2,7 @@ import joplin from 'api';
 import { Eau } from './eau';
 import { EauDebtEntity, EauListItem, EauShoppingItem } from './eau.types';
 import { Templates } from './eau.templates';
+import { SettingItemType } from 'api/types';
 
 
 const enum VIEWS {
@@ -25,8 +26,8 @@ class EauShoppingArray extends Array<EauShoppingItem> {
 		return this.sort((a, b) => (b.price || 0) - (a.price || 0));
 	}
 
-	getHtml(): string {
-		return Templates.list(this.getItems().map<EauListItem>(i => {
+	getHtml(listItemsNum: number): string {
+		return Templates.list(listItemsNum * 38, this.getItems().map<EauListItem>(i => {
 			return {
 				label: `<span>${i.name}</span>
 								${i.price && `<span>${this.fmt.format(i.price)}</span>`}`,
@@ -88,8 +89,8 @@ class EauDebtArray extends Array<EauDebtEntity> {
 		return [...debtors, ...creditors];
 	}
 
-	getHtml(): string {
-		return Templates.list(this.getEntitiesSorted().map<EauListItem>(e => {
+	getHtml(listItemsNum: number): string {
+		return Templates.list(listItemsNum * 38, this.getEntitiesSorted().map<EauListItem>(e => {
 			return {
 				label: `<span class="${e.isDebtor ? 'eau-debt-debtor' : 'eau-debt-creditor'}">${e.name}</span>
 								<span class="${e.isDebtor ? 'eau-debt-debtor' : 'eau-debt-creditor'}">${this.fmt.format(e.amount)}</span>`,
@@ -140,13 +141,25 @@ joplin.plugins.register({
 		const debts = EauDebtArray.fromEauDebtEntityList(eau.getDebt());
 		const shopping = EauShoppingArray.fromEauShoppingList(eau.getShopping());
 		let currentView = VIEWS.DEBTS;
+		await Eau.setupSettings({
+			id: "eauDebtSettings",
+			label: "Eau - Debt",
+			settings: [{
+				id: "maxListItems_Debt",
+				description: "",
+				label: "Max number of list items",
+				value: 8,
+				type: SettingItemType.Int
+			}]
+		});
 		const refreshHtml = async () => {
+			const listItemsNum = await Eau.getSetting("maxListItems_Debt");
 			await joplin.views.panels.setHtml(panel, Eau.replaceTemplateVars(html, (match) => {
 				if(match === "content"){
 					if(currentView === VIEWS.DEBTS) {
-						return debts.getHtml();
+						return debts.getHtml(listItemsNum);
 					} else if(currentView === VIEWS.SHOPPING){
-						return shopping.getHtml();
+						return shopping.getHtml(listItemsNum);
 					}
 				} else if(match === "dropdown") {
 					return Templates.dropdown({

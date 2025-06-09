@@ -31,8 +31,8 @@ export const Templates = {
       <input id="${ input.id }" name="${ input.id }" type="${ input.type }" class="${ input.type === 'checkbox' ? 'eau-checkbox-input' : 'eau-input' }" ${input.type !== "checkbox" ? 'placeholder' : ''} />
     </div>`;
   },
-  list(items: EauListItem[]){
-    return `<div class='eau-list eau-scrollbar'>
+  list(height: number, items: EauListItem[]){
+    return `<div class='eau-list eau-scrollbar' style="max-height: ${height}px;">
       ${ items.map(item => this.listItem(item)).join("\n") }
     </div>`;
   } ,
